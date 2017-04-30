@@ -6,6 +6,8 @@ build/
 
 # editor config
 .vscode/
+ExtendedKF.build/
+ide_profiles/
 
 # Libraries
 src/Eigen/
