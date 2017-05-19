@@ -25,10 +25,16 @@ public:
 
   ///* state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
   VectorXd x_;
-
+    
+  ///* Augmented state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate nu psi] in SI units and rad
+  VectorXd x_aug_;
+  
   ///* state covariance matrix
   MatrixXd P_;
-
+  
+  ///* state covariance matrix
+  MatrixXd P_aug_;
+  
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
@@ -108,6 +114,15 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+  
+private:
+  void GenerateSigmaPoints(MatrixXd* Xsig_out);
+  void AugmentedSigmaPoints(MatrixXd* Xsig_out);
+  void SigmaPointPrediction(MatrixXd Xsig_aug, double delta_t, MatrixXd* Xsig_out);
+  void PredictMeanAndCovariance(VectorXd* x_pred, MatrixXd* P_pred);
+  void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out);
+  void UpdateState(VectorXd* x_out, MatrixXd* P_out);
+
 };
 
 #endif /* UKF_H */

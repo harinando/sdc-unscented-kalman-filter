@@ -85,7 +85,6 @@ int main(int argc, char* argv[]) {
 
     if (sensor_type.compare("L") == 0) {
       // laser measurement
-
       // read measurements at this timestamp
       meas_package.sensor_type_ = MeasurementPackage::LASER;
       meas_package.raw_measurements_ = VectorXd(2);
@@ -157,7 +156,8 @@ int main(int argc, char* argv[]) {
   out_file_ << "vx_ground_truth" << "\t";
   out_file_ << "vy_ground_truth" << "\n";
 
-
+  cout << "# measurements: " << number_of_measurements << endl;
+    
   for (size_t k = 0; k < number_of_measurements; ++k) {
     // Call the UKF-based fusion
     ukf.ProcessMeasurement(measurement_pack_list[k]);
@@ -216,7 +216,6 @@ int main(int argc, char* argv[]) {
     
     estimations.push_back(ukf_x_cartesian_);
     ground_truth.push_back(gt_pack_list[k].gt_values_);
-
   }
 
   // compute the accuracy (RMSE)
