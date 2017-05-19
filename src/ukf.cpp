@@ -131,9 +131,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
    */
   float dt = (meas_package.timestamp_ - time_us_) / 1000000.0;
   time_us_ = meas_package.timestamp_;
-  std::cout << "Delta_t: " << dt << " " << std::endl;
-  std::cout << "z: " <<  meas_package.raw_measurements_ << " " << std::endl;
-  std::cout << std::endl;
   Prediction(dt);
   /*
    * Update
